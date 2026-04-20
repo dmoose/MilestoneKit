@@ -1,36 +1,37 @@
-// swift-tools-version: 5.9
-
+// swift-tools-version: 6.0
 import PackageDescription
 
 let package = Package(
-    name: "WhatsNewKit",
+    name: "MilestoneKit",
     platforms: [
-        .iOS(.v13),
-        .macOS(.v11),
-        .visionOS(.v1)
+        .macOS(.v15),
+        .iOS(.v18),
+        .visionOS(.v2),
     ],
     products: [
         .library(
-            name: "WhatsNewKit",
-            targets: [
-                "WhatsNewKit"
-            ]
-        )
+            name: "MilestoneKit",
+            targets: ["MilestoneKit"]
+        ),
     ],
     targets: [
         .target(
-            name: "WhatsNewKit",
-            path: "Sources",
+            name: "MilestoneKit",
             resources: [
-                .process("Resources/PrivacyInfo.xcprivacy")
+                .process("Resources/PrivacyInfo.xcprivacy"),
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+                .enableUpcomingFeature("ExistentialAny"),
+                .enableUpcomingFeature("InternalImportsByDefault"),
             ]
         ),
         .testTarget(
-            name: "WhatsNewKitTests",
-            dependencies: [
-                "WhatsNewKit"
-            ],
-            path: "Tests"
-        )
+            name: "MilestoneKitTests",
+            dependencies: ["MilestoneKit"],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+            ]
+        ),
     ]
 )
